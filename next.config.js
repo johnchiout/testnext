@@ -3,6 +3,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  images: {
+    domains: ['fakestoreapi.com', "https://image.tmdb.org/t/p/w500", "image.tmdb.org", "https://www.themoviedb.org"],
+},
 }
 
 module.exports = nextConfig
