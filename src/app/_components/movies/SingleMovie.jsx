@@ -1,5 +1,8 @@
 import React from 'react'
 import Image from 'next/image';
+
+
+
 const getMovies = async () => {
     const account_id = 20182941;
     const url = `https://api.themoviedb.org/3/discover/movie`;
@@ -19,13 +22,25 @@ const getMovies = async () => {
 
 const SingleMovie = async () => {
     const movies = await getMovies();
-    console.log(movies)
+    let newMovies = [movies]
     return (
         <div>
-            <h1>Single Movie</h1>
-            <Image 
-                src={`https://image.tmdb.org/t/p/w500${movies.results[0].poster_path}`} width={500} height={500} alt={`Poster for ${movies.results[0].title}`}
-            />
+           {newMovies.map((movie, index) => {
+                    return (
+                       <div key={index}>
+                         <div  className='movie-image-container'>
+                        <Image 
+                            className='movie-image'
+                            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
+                            fill={true}
+                            alt={`Poster for ${movie.title}`}
+                        />
+                        </div>
+                       </div>
+
+                    )
+              
+           })}
         </div>
     )
 }
