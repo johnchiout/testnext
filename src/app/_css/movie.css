@@ -1,23 +1,109 @@
-.metascrore-container {
-    position: absolute;
-    left : 10px;
-    bottom: 10px;
-    border-radius: 50%;
+:root {
+    --dot-diameter: 40px;
+    --circle-border-width: 3px;
+    --default-color: rgb(87, 87, 87);
+    --completion-color: rgb(16, 238, 112);
+    --card-background-color:  rgb(15, 15, 15);
 }
 
+
+
+.movie-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex;
+    height: 100vh;
+    background-color: black;
+    overflow-y: scroll;
+}
 
 .movie-image-container {
     position: relative;
-    width: 150px;
+    width: 220px;
     height: 220px;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
 }
+
+.single-movie-container {
+    position: relative;
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 6px;
+    margin: 10px;
+    padding: 3px;
+    background-color: var(--card-background-color);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+
 
 
 .movie-image {
     object-fit: cover;
     border-radius: 10px;
-    width: 150px;
-    height: 300px;
+    object-position: top;
+    position: relative;
+}
+
+
+/* MOVIE RATING: */
+
+.score-container {
+    position: relative;
+    margin-top: -25px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--card-background-color);
+    border-radius: 50%;
+}
+
+.circle-container {
+    z-index: 2;
+    border-radius: 50%;
+    width: var(--dot-diameter);
+    height: var(--dot-diameter);
+    transform: rotate(-90deg);
+    position: relative;
+}
+
+.circle-container__background {
+    fill: none;
+    stroke: var(--default-color);
+    stroke-width: var(--circle-border-width);
+}
+
+.circle-container__progress {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linecap: round;
+    stroke-width: var(--circle-border-width);
+    transition: stroke-dashoffset 1s ease-in-out;
+    will-change: transform;
+}
+
+.score {
+    position: absolute;
+    z-index: 12;
+    font-size: 12px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.movie-details {
+    padding: 10px;
+    padding-top: 0;
+}
+.movie-details .movie-details-title {
+    font-size: 15px;
 }
