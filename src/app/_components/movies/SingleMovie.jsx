@@ -4,7 +4,6 @@ import MetaScore from './MetaScore';
 
 
 const SingleMovie = async ({movies}) => {
-   
 
     return (
         <div className='movie-container'>
