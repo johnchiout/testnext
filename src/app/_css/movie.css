@@ -4,6 +4,7 @@
     --default-color: rgb(87, 87, 87);
     --completion-color: rgb(16, 238, 112);
     --card-background-color:  rgb(15, 15, 15);
+    --movie-list-height: 80px;
 }
 
 
@@ -12,12 +13,11 @@
     overflow-y: scroll;
 }
 .movie-container {
-    margin-top: 100px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     justify-content: flex-start;
     align-items: flex;
-    height: calc(100vh - 100px);
+    height: calc(100vh - var(--movie-list-height));
     background-color: black;
     /* overflow-y: scroll; */
 }
@@ -150,27 +150,37 @@
 
 
 
-
-.movies_filter_container:active {
-    transform: scale(0.96);
-   
-}
-
-
-/* ICON DIV */
-/* .movies_filter_container div {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: rgb(53, 53, 53);
-    border: 1px solid rgb(51, 51, 51);
+.top-bar {
+    height: 80px;
+    padding: 10px;
     display: flex;
     align-items: center;
-    justify-content: center;
-} */
-.movies_filter_sort_icon {
-    font-size: 15px;
-   
 }
 
 
+.movies-filter {
+    max-width: 1000px;
+    border-radius: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    display: flex;
+    padding: 3px;
+}
+
+.movies-filter-button {
+    border: none;
+    color: #747474;
+    padding: 4px 20px;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+  .movies-filter-button_active {
+    background: linear-gradient(to right, #6a00ff, #a200ff, #d700ff);
+    color: white;
+  }

@@ -1,13 +1,24 @@
-import React from 'react'
+'use client'
+import React, {useState} from 'react'
 import Image from 'next/image';
-import MetaScore from './MetaScore';
-
-
-const SingleMovie = async ({movies}) => {
-
-    return (
+const MovieFilter = ({getMovies}) => {
+    const [movies, setMovies] = React.useState([]);
+    const [active, setActive ] = useState(1)
+    const fetchMovies = async(query, id) => {
+        setActive(id)
+      let result =  await getMovies(query);
+        setMovies(result?.results);
+      }
+  return (
+    <>
+      <div className='top-bar'>
+      <div className="movies-filter" >
+        <button className={`movies-filter-button ${active === 1 && "movies-filter-button_active"}`} onClick={() => fetchMovies('movie/now_playing', 1)}>Now playing</button>
+        <button className={`movies-filter-button ${active === 2 && "movies-filter-button_active"}`} onClick={() => fetchMovies('movie/popular', 2)}>Popular</button>
+    </div>
+      </div>
         <div className='movie-container'>
-            {movies.results.map((movie, index) => {
+            {movies.map((movie, index) => {
                 return (
                     <div key={index} className='single-movie-container'>
                         <div className='movie-image-container'>
@@ -47,7 +58,8 @@ const SingleMovie = async ({movies}) => {
                 )
             })}
         </div>
-    )
+    </>
+  )
 }
 
-export default SingleMovie
+export default MovieFilter
