@@ -1,0 +1,33 @@
+.movie-page-container {
+    min-height: 100vh;
+    background-color: black;
+
+}
+
+.movie-page-container_top {
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.movie-page-container_top_inner {
+    width: 80%;
+    height: 80%;
+
+}
+
+.movie-page-container_top_inner_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 500px;
+    object-position: top;
+   
+
+}
+
+.movie-page-container_top_inner_image img {
+    object-fit: cover;
+}

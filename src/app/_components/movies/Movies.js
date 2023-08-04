@@ -1,27 +1,48 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
 const MovieFilter = ({getMovies}) => {
-    const [movies, setMovies] = React.useState([]);
+    const [movies, setMovies] = useState([]);
+    const [singleMovie, setSingleMovie] = useState({});
+    const [dialog, setDialog] = useState(false);
+    const [title, setTitle] = useState('');
     const [active, setActive ] = useState(1)
-    const fetchMovies = async(query, id) => {
+    const router = useRouter()
+
+    useEffect(() => {
+        fetchMovies('movie/now_playing', 1, "Now playing")
+    }, [])
+
+    const fetchMovies = async(query, id, title) => {
         setActive(id)
+        setTitle(title)
       let result =  await getMovies(query);
         setMovies(result?.results);
       }
+
+     const handleSingleMovie = async (id) => {
+       router.push(`/movie/${id}`)
+     }
+      
   return (
-    <>
+    <div className='movie_page_wrapper'>
       <div className='top-bar'>
       <div className="movies-filter" >
-        <button className={`movies-filter-button ${active === 1 && "movies-filter-button_active"}`} onClick={() => fetchMovies('movie/now_playing', 1)}>Now playing</button>
-        <button className={`movies-filter-button ${active === 2 && "movies-filter-button_active"}`} onClick={() => fetchMovies('movie/popular', 2)}>Popular</button>
+        <button className={`movies-filter-button ${active === 1 && "movies-filter-button_active"}`} onClick={() => fetchMovies('movie/now_playing', 1, "Now playing")}>Now playing</button>
+        <button className={`movies-filter-button ${active === 2 && "movies-filter-button_active"}`} onClick={() => fetchMovies('movie/popular', 2, "Popular")}>Popular</button>
+        <button className={`movies-filter-button ${active === 3 && "movies-filter-button_active"}`} onClick={() => fetchMovies('movie/top_rated', 3, "Top rated")}>Top rated</button>
+        <button className={`movies-filter-button ${active === 4 && "movies-filter-button_active"}`} onClick={() => fetchMovies('discover/movie?vote_average.gte=8&page=2&vote_count.gte=2000', 4, "Discover")}>Discover</button>
     </div>
       </div>
+      <h2 className='page-title'>{title}</h2>
         <div className='movie-container'>
+           
             {movies.map((movie, index) => {
                 return (
                     <div key={index} className='single-movie-container'>
-                        <div className='movie-image-container'>
+                        <div className='movie-image-container' onClick={() => handleSingleMovie(movie.id)}>
                             <Image
                                 className='movie-image'
                                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -58,7 +79,7 @@ const MovieFilter = ({getMovies}) => {
                 )
             })}
         </div>
-    </>
+    </div>
   )
 }
 

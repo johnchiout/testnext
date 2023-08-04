@@ -1,8 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('./_css/productpage.css');
 @import url('./_css/movie.css');
+@import url('./_css/movieSingle.css');
 
 
 
