@@ -1,7 +1,5 @@
 import React from 'react'
-import MovieFilter from '@/app/_components/movies/Movies'
 import Image from 'next/image';
-
 
 const getMovies = async (id) => {
     const url = `https://api.themoviedb.org/3/${id}`;
@@ -28,6 +26,14 @@ const Page = async ({ params }) => {
 
     const movie = await getMovies(`movie/${params.id}`)
     console.log(movie)
+
+    const handleRunitime = (runtime) => {
+        const hours = Math.floor(runtime / 60);
+        const minutes = runtime % 60;
+        return `${hours}h ${minutes}m`
+    }
+
+    let runtime = handleRunitime(movie.runtime)
     return (
         <div className='movie-page-container'>
             <div className="movie-page-container_top">
@@ -56,7 +62,23 @@ const Page = async ({ params }) => {
                     </div>
                     <div className='single-movie-details'>
                         <div className='single-movie-details_top'>
-                            <h1>{movie.title}</h1>
+                            <h1>{movie.title} <span>{`(${movie.release_date})`}</span></h1>
+                            <div>
+                                {movie.genres.map((genre, index) => {
+                                    if(index === movie.genres.length - 1) {
+                                        return (
+                                            <span key={index}> {genre.name}</span>
+                                        )
+                                    }
+                                    return (
+                                        <span key={index}> {genre.name},</span>
+                                    )
+                                })}
+                                <span className='movie-single-circle-divider'> • </span>
+                                <span>{runtime}</span>
+                                <div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
